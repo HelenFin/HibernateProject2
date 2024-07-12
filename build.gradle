@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'org.flywaydb.flyway' version '10.15.2'
+    id 'application'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.hibernate.orm:hibernate-core:6.5.2.Final'
+    implementation 'org.flywaydb:flyway-core:10.15.2'
+    implementation 'com.h2database:h2:2.2.224'
+    implementation 'jakarta.persistence:jakarta.persistence-api:3.2.0'
+    implementation 'jakarta.validation:jakarta.validation-api:3.1.0'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaExec) {
+    standardOutput = System.out
+    errorOutput = System.err
+}
+
+application {
+    mainClass = 'org.example.Main'
+}
