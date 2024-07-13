@@ -1,8 +1,6 @@
 package org.example.service;
 
 import org.example.entity.Ticket;
-import org.example.entity.Client;
-import org.example.entity.Planet;
 import org.example.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -15,8 +13,11 @@ public class TicketCrudService {
         if (ticket.getClient() == null || ticket.getClient().getId() == 0) {
             throw new IllegalArgumentException("Ticket must have a valid client");
         }
-        if (ticket.getPlanet() == null || ticket.getPlanet().getId() == null) {
-            throw new IllegalArgumentException("Ticket must have a valid planet");
+        if (ticket.getFromPlanet() == null || ticket.getFromPlanet().getId() == null) {
+            throw new IllegalArgumentException("Ticket must have a valid fromPlanet");
+        }
+        if (ticket.getToPlanet() == null || ticket.getToPlanet().getId() == null) {
+            throw new IllegalArgumentException("Ticket must have a valid toPlanet");
         }
 
         Transaction transaction = null;

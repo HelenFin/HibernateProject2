@@ -16,8 +16,12 @@ public class Ticket {
     private Client client;
 
     @ManyToOne
-    @JoinColumn(name = "planet_id", nullable = false)
-    private Planet planet;
+    @JoinColumn(name = "from_planet_id", nullable = false)
+    private Planet fromPlanet;
+
+    @ManyToOne
+    @JoinColumn(name = "to_planet_id", nullable = false)
+    private Planet toPlanet;
 
     @Column(name = "purchase_date", nullable = false)
     private Date purchaseDate;
@@ -38,12 +42,20 @@ public class Ticket {
         this.client = client;
     }
 
-    public Planet getPlanet() {
-        return planet;
+    public Planet getFromPlanet() {
+        return fromPlanet;
     }
 
-    public void setPlanet(Planet planet) {
-        this.planet = planet;
+    public void setFromPlanet(Planet fromPlanet) {
+        this.fromPlanet = fromPlanet;
+    }
+
+    public Planet getToPlanet() {
+        return toPlanet;
+    }
+
+    public void setToPlanet(Planet toPlanet) {
+        this.toPlanet = toPlanet;
     }
 
     public Date getPurchaseDate() {

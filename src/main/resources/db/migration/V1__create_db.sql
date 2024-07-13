@@ -13,8 +13,10 @@ CREATE TABLE planet (
 CREATE TABLE ticket (
     id INT PRIMARY KEY AUTO_INCREMENT,
     client_id INT NOT NULL,
-    planet_id VARCHAR(10) NOT NULL,
+    from_planet_id VARCHAR(10) NOT NULL,
+    to_planet_id VARCHAR(10) NOT NULL,
     purchase_date DATE NOT NULL,
     FOREIGN KEY (client_id) REFERENCES client(id),
-    FOREIGN KEY (planet_id) REFERENCES planet(id)
+    FOREIGN KEY (from_planet_id) REFERENCES planet(id),
+    FOREIGN KEY (to_planet_id) REFERENCES planet(id)
 );

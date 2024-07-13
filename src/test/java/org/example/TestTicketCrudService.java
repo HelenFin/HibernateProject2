@@ -20,7 +20,8 @@ public class TestTicketCrudService {
     private ClientCrudService clientService;
     private PlanetCrudService planetService;
     private Client client;
-    private Planet planet;
+    private Planet fromPlanet;
+    private Planet toPlanet;
 
     @BeforeEach
     public void setup() {
@@ -33,32 +34,41 @@ public class TestTicketCrudService {
         client.setEmail("test.client@example.com");
         clientService.createClient(client);
 
-        planet = new Planet();
-        planet.setId("TEST");
-        planet.setName("Test Planet");
-        planet.setDistance(143.0);
-        planetService.createPlanet(planet);
+        fromPlanet = new Planet();
+        fromPlanet.setId("FROMTEST");
+        fromPlanet.setName("From Test Planet");
+        fromPlanet.setDistance(143.0);
+        planetService.createPlanet(fromPlanet);
+
+        toPlanet = new Planet();
+        toPlanet.setId("TOTEST");
+        toPlanet.setName("To Test Planet");
+        toPlanet.setDistance(200.0);
+        planetService.createPlanet(toPlanet);
     }
 
     @Test
     public void testCreateTicket() {
         Ticket ticket = new Ticket();
         ticket.setClient(client);
-        ticket.setPlanet(planet);
+        ticket.setFromPlanet(fromPlanet);
+        ticket.setToPlanet(toPlanet);
         ticket.setPurchaseDate(new Date());
         ticketService.createTicket(ticket);
 
         Ticket retrievedTicket = ticketService.readTicket(ticket.getId());
         assertNotNull(retrievedTicket);
         assertEquals(client.getId(), retrievedTicket.getClient().getId());
-        assertEquals(planet.getId(), retrievedTicket.getPlanet().getId());
+        assertEquals(fromPlanet.getId(), retrievedTicket.getFromPlanet().getId());
+        assertEquals(toPlanet.getId(), retrievedTicket.getToPlanet().getId());
     }
 
     @Test
     public void testReadTicket() {
         Ticket ticket = new Ticket();
         ticket.setClient(client);
-        ticket.setPlanet(planet);
+        ticket.setFromPlanet(fromPlanet);
+        ticket.setToPlanet(toPlanet);
         ticket.setPurchaseDate(new Date());
         ticketService.createTicket(ticket);
 
@@ -70,7 +80,8 @@ public class TestTicketCrudService {
     public void testUpdateTicket() {
         Ticket ticket = new Ticket();
         ticket.setClient(client);
-        ticket.setPlanet(planet);
+        ticket.setFromPlanet(fromPlanet);
+        ticket.setToPlanet(toPlanet);
         ticket.setPurchaseDate(new Date());
         ticketService.createTicket(ticket);
 
@@ -86,7 +97,8 @@ public class TestTicketCrudService {
     public void testDeleteTicket() {
         Ticket ticket = new Ticket();
         ticket.setClient(client);
-        ticket.setPlanet(planet);
+        ticket.setFromPlanet(fromPlanet);
+        ticket.setToPlanet(toPlanet);
         ticket.setPurchaseDate(new Date());
         ticketService.createTicket(ticket);
 
@@ -100,8 +112,11 @@ public class TestTicketCrudService {
         if (clientService.readClient(client.getId()) != null) {
             clientService.deleteClient(client.getId());
         }
-        if (planetService.readPlanet(planet.getId()) != null) {
-            planetService.deletePlanet(planet.getId());
+        if (planetService.readPlanet(fromPlanet.getId()) != null) {
+            planetService.deletePlanet(fromPlanet.getId());
+        }
+        if (planetService.readPlanet(toPlanet.getId()) != null) {
+            planetService.deletePlanet(toPlanet.getId());
         }
     }
 }

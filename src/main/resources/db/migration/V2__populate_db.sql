@@ -17,14 +17,14 @@ INSERT INTO planet (id, name, distance) VALUES
 ('JUPITER', 'Jupiter', 628.7),
 ('SATURN', 'Saturn', 1275.0);
 
-INSERT INTO ticket (client_id, planet_id, purchase_date) VALUES
-(1, 'MERCURY', '2024-01-01'),
-(2, 'VENUS', '2024-01-02'),
-(3, 'MARS', '2024-01-03'),
-(4, 'JUPITER', '2024-01-04'),
-(5, 'SATURN', '2024-01-05'),
-(6, 'MERCURY', '2024-01-06'),
-(7, 'VENUS', '2024-01-07'),
-(8, 'MARS', '2024-01-08'),
-(9, 'JUPITER', '2024-01-09'),
-(10, 'SATURN', '2024-01-10');
+INSERT INTO ticket (client_id, from_planet_id, to_planet_id, purchase_date) VALUES
+(1, 'MERCURY', 'VENUS', '2024-01-01'),
+(2, 'VENUS', 'MARS', '2024-01-02'),
+(3, 'MARS', 'JUPITER', '2024-01-03'),
+(4, 'JUPITER', 'SATURN', '2024-01-04'),
+(5, 'SATURN', 'MERCURY', '2024-01-05'),
+(6, 'MERCURY', 'VENUS', '2024-01-06'),
+(7, 'VENUS', 'MARS', '2024-01-07'),
+(8, 'MARS', 'JUPITER', '2024-01-08'),
+(9, 'JUPITER', 'SATURN', '2024-01-09'),
+(10, 'SATURN', 'MERCURY', '2024-01-10');

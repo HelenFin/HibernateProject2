@@ -3,7 +3,7 @@ package org.example.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "planet")
@@ -21,8 +21,11 @@ public class Planet {
     @Column(nullable = false)
     private double distance;
 
-    @OneToMany(mappedBy = "planet", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Ticket> tickets;
+    @OneToMany(mappedBy = "fromPlanet", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Ticket> departureTickets;
+
+    @OneToMany(mappedBy = "toPlanet", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Ticket> arrivalTickets;
 
     public String getId() {
         return id;
@@ -48,11 +51,19 @@ public class Planet {
         this.distance = distance;
     }
 
-    public List<Ticket> getTickets() {
-        return tickets;
+    public Set<Ticket> getDepartureTickets() {
+        return departureTickets;
     }
 
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
+    public void setDepartureTickets(Set<Ticket> departureTickets) {
+        this.departureTickets = departureTickets;
+    }
+
+    public Set<Ticket> getArrivalTickets() {
+        return arrivalTickets;
+    }
+
+    public void setArrivalTickets(Set<Ticket> arrivalTickets) {
+        this.arrivalTickets = arrivalTickets;
     }
 }
